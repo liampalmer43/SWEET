@@ -19,26 +19,29 @@ ostream& operator<< (ostream &out, Card &cCard){
 }
 
 vector<Card*> deck;
-int recorder[104];
-int v1, v2, v3, s1, s2, s3; 		//dealer's hand
-int dealstage = 1;
-int bet1 = 0;
+int recorder[104];				//keeps track of which cards int he deck are in use
+int v1, v2, v3, s1, s2, s3; 			//dealer's hand and players hand in deck
+int dealstage = 1;				//stage of hand/game
+int bet1 = 0;					//money management
 int bet2 = 0;
 int bet3 = 0;
 int bet;
 int cash = 500;
 
-int getRandom(){
+int getRandom(){				//getRandom randomly selects a card fromt the deck
 	int v1;
 	while(true){
                 v1 = rand() % 104;    
-             	if(recorder[v1] == 0){
+             	if(recorder[v1] == 0){		//checks if card is already in use
                      	recorder[v1] = 1;
                         break;
                 }
         }
 	return v1;
 }
+
+///Finds best corresponding match between two cards
+///Returns either N (number), S (suit), C (combo = "number and suit") or "nothing" if no match exists
 
 string Bester(Card* c1, Card* c2){
 	int num8 = 0;
@@ -60,6 +63,8 @@ string Bester(Card* c1, Card* c2){
 	}
 	return "nothing";
 }
+
+///Finds best corresponding match sequence if one exists
 
 string Best(){
 	string states[10] = {"CCC","CCN","CCS","CNN","CNS","CSS","NNN","NNS","NSS","SSS"};
