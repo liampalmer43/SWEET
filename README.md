@@ -1,2 +1,0 @@
-# SWEET
-Game Implementation
